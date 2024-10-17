@@ -29,6 +29,7 @@ export async function createInvoice(formData: FormData) {
     try {
         await sql`INSERT INTO invoices (customer_id, amount, status, date) VALUES (${customerId}, ${amountInCents}, ${status}, ${date})`;
     } catch (error) {
+        console.debug(error)
         return { message: 'Database error: Failed to create invoice.' };
     }
 
@@ -48,6 +49,7 @@ export async function updateInvoice(id: string, formData: FormData) {
     try {
         await sql`UPDATE invoices SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status} WHERE id = ${id}`;
     } catch (error) {
+        console.debug(error)
         return { message: 'Database error: Failed to update invoice.' };
     }
 
@@ -59,6 +61,7 @@ export async function deleteInvoice(id: string) {
     try {
         await sql`DELETE FROM invoices WHERE id = ${id}`;
     } catch (error) {
+        console.debug(error)
         return { message: 'Database error: Failed to delete invoice.' };
     }
     
